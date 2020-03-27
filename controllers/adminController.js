@@ -2,7 +2,7 @@ const session = require("express-session");
 const crypto = require("crypto");
 const fs = require("fs");
 const multer = require("multer");
-var upload = multer({ dest: "../public/images" });
+// var upload = multer({ dest: "../public/images" });
 var { admin } = require("../models/product");
 
 function hash(input, salt) {
