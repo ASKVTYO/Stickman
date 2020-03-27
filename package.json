@@ -29,5 +29,18 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0"
-  }
+  },
+  "description": "",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ASKVTYO/Stickman.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ASKVTYO/Stickman/issues"
+  },
+  "homepage": "https://github.com/ASKVTYO/Stickman#readme"
 }
