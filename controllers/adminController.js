@@ -2,7 +2,7 @@ const session = require("express-session");
 const crypto = require("crypto");
 const fs = require("fs");
 const multer = require("multer");
-// var upload = multer({ dest: "../public/images" });
+var upload = multer({ dest: "/home/bunny/Desktop/images" });
 var { admin } = require("../models/product");
 
 function hash(input, salt) {
@@ -60,6 +60,9 @@ exports.postAdminLogin = (req, res) => {
         admin_hash = hash(admin_details.password, salt);
         if (admin_hash === user.password) {
           req.session.admin = true;
+          console.log(req.files);
+          req.session.__v = user.__v;
+          req.session._id = user._id;
           res.status(200).send("Admin Successfully loggedin");
         } else {
           res.status(400).send("Incorrect Password");
@@ -73,9 +76,20 @@ exports.postAdminLogin = (req, res) => {
 };
 
 exports.getDisplayImage = (req, res) => {
-  console.log(req.session.admin);
-  console.log(req.session.username);
-  res.send("success");
+  console.log(req.session._id);
+  var user = admin.findOne({ _id: req.session._id }, (err, result) => {
+    if (err) console.log(err);
+    if (result) {
+      console.log(req.session.__v);
+      console.log(result);
+      result.img.data = fs.readFileSync(req.files.userPhoto.path);
+      result.img.contentType = "jpg/png";
+      result.save();
+      res.status(200).send("success");
+    } else {
+      err => res.send(err);
+    }
+  });
 };
 
 exports.getLogout = (req, res) => {
