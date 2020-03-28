@@ -1,8 +1,7 @@
 const session = require("express-session");
 const crypto = require("crypto");
 const fs = require("fs");
-const multer = require("multer");
-var upload = multer({ dest: "/home/bunny/Desktop/images" });
+// const multer = require("multer");
 var { admin } = require("../models/product");
 
 function hash(input, salt) {
