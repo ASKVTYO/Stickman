@@ -32,16 +32,7 @@ exports.postCreateAdmin = (req, res) => {
     });
 };
 
-// exports.postCreateStudent = (req, res) => {
-//   console.log(req.session.admin);
-//   if (req.session.admin) {
-//     let newStudent = new student(req.body);
-//     console.log(req.body.username);
-//     res.status(200).send("success");
-//   } else {
-//     res.send("failure");
-//   }
-// };
+
 
 exports.getAdminLogin = (req, res) => {
   res.send("Hi Admin");

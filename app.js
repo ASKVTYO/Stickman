@@ -8,7 +8,7 @@ var logger = require("morgan");
 var multer = require("multer");
 var config = require("config");
 var app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 var Router = require("./routes/index");
 
 //MongoDB Connection
