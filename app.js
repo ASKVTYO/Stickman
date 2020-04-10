@@ -2,6 +2,7 @@ var createError = require("http-errors");
 var express = require("express");
 var session = require("express-session");
 var path = require("path");
+const cors = require("cors");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
@@ -29,12 +30,20 @@ mongoose
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.set("views", "views");
+app.options("*", cors());
+app.use(cors({}));
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
-app.use(bodyParser.json({ limit: "50mb" }));
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 10000
+  })
+);
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(express.static(path.join("public")));
 app.use(
   session({
@@ -44,6 +53,8 @@ app.use(
     cookie: {}
   })
 );
+
+// app.set(multer({ dest: "./uploads" }));
 
 Router(app);
 
