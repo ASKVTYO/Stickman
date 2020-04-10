@@ -55,14 +55,14 @@ exports.postMusic = (req, res) => {
   });
 };
 
-exports.patchMusic = (req, res) => {
+exports.updateMusic = (req, res) => {
   console.log(req.params.id);
   console.log(req.body);
-  song.findByIdAndUpdate(
-    { id: req.params.trackID },
-    { name: req.body.name },
-    (err, result) => {}
-  );
+  // song.findByIdAndUpdate(
+  //   { id: req.params.trackID },
+  //   { name: req.body.name },
+  //   (err, result) => {}
+  // );
   if (req.body.update == "name") {
     song.findByIdAndUpdate(
       { id: req.params.trackID },
