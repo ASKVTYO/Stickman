@@ -10,7 +10,8 @@ var storage = multer.diskStorage({
     callback(null, "/home/bunny/Desktop/practice/uploads");
   },
   filename: function (req, file, callback) {
-    callback(null, file.fieldname + "-" + "id");
+    // callback(null, file.fieldname + "-" + "id");
+    callback(null, file.fieldname + "-" + Date.now());
     console.log(file.id);
   },
 });
@@ -56,44 +57,20 @@ exports.postMusic = (req, res) => {
 };
 
 exports.updateMusic = (req, res) => {
-  console.log(req.params.id);
-  console.log(req.body);
-  // song.findByIdAndUpdate(
-  //   { id: req.params.trackID },
-  //   { name: req.body.name },
-  //   (err, result) => {}
-  // );
-  if (req.body.update == "name") {
-    song.findByIdAndUpdate(
-      { id: req.params.trackID },
-      { name: req.body.value },
-      function (err, doc) {
-        if (err) return res.send(500, { error: err });
-      }
-    );
-  } else if (req.body.update == "genre") {
-    song.findByIdAndUpdate(
-      { id: req.params.trackID },
-      { genre: req.body.value },
-      function (err, doc) {
-        if (err) return res.send(500, { error: err });
-      }
-    );
-  } else if (req.body.update == "music") {
-    song.findByIdAndUpdate(
-      { id: req.params.trackID },
-      { music: req.body.value },
-      function (err, doc) {
-        if (err) return res.send(500, { error: err });
-      }
-    );
-  } else if (req.body.update == "groupTag") {
-    song.findByIdAndUpdate(
-      { id: req.params.trackID },
-      { groupTag: req.body.value },
-      function (err, doc) {
-        if (err) return res.send(500, { error: err });
-      }
-    );
-  }
+  song.findByIdAndUpdate(
+    { _id: req.params.trackID },
+    {
+      name: req.body.name,
+      genre: req.body.genre,
+      music: req.body.music,
+      groupTag: req.body.groupTag,
+    },
+    (result, err) => {
+      console.log("inside");
+      if (err) console.log(err);
+
+      res.send("success");
+    }
+  );
+  
 };
